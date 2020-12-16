@@ -30,8 +30,8 @@ class AuthService {
     DocumentReference ref = userCollection.doc(uid);
 
     try {
-      ref.get().then((querySnapshot) {
-        this.u = _userFromFirebaseUser(querySnapshot);
+      ref.get().then((querySnapshot) async {
+        this.u = await _userFromFirebaseUser(querySnapshot);
       });
       // print(this.u);
       return this.u;

@@ -19,10 +19,8 @@ class _LoginState extends State<Login> {
   String password = '';
   final _formkey = GlobalKey<FormState>();
 
-  void signIn(String email, String password) async {
+  Future signIn(String email, String password) async {
     dynamic result = await _auth.signInWithEmailAndPassword(email, password);
-    print("Result");
-    print(result);
     Inventory_User u = await _auth.getUserData(result.uid);
     if (result == null) {
       print("error");
@@ -106,10 +104,8 @@ class _LoginState extends State<Login> {
                                       borderRadius:
                                           BorderRadius.circular(18.0)),
                                   onPressed: () async {
-                                    print(email);
-                                    print(password);
                                     if (_formkey.currentState.validate()) {
-                                      signIn(email, password);
+                                      await signIn(email, password);
                                     }
                                   },
                                   child: Text(
