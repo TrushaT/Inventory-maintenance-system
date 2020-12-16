@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:inventory_management/models/user.dart';
+import 'package:inventory_management/screens/homepage/admin_homepage.dart';
 import 'package:inventory_management/screens/homepage/employee_homepage.dart';
 import 'package:inventory_management/screens/homepage/manager_homepage.dart';
 import 'package:inventory_management/services/auth.dart';
@@ -20,12 +23,19 @@ class _LoginState extends State<Login> {
   final _formkey = GlobalKey<FormState>();
 
   Future signIn(String email, String password) async {
-    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
-    Inventory_User u = await _auth.getUserData(result.uid);
+    print(1);
+    dynamic result = await _auth.signInWithEmailAndPassword(
+        email: email, password: password);
+    print("Result");
+    print(result);
     if (result == null) {
       print("error");
     } else {
-      print(u.user_type);
+      dynamic u = await _auth.getUserData(result.uid);
+      //abruptly starting this...
+      print("u");
+      print(u);
+      print(3);
       if (u.user_type == 'manager') {
         Navigator.pushAndRemoveUntil(
             context,
@@ -35,6 +45,11 @@ class _LoginState extends State<Login> {
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => EmployeeHomePage()),
+            (Route<dynamic> route) => false);
+      } else if (u.user_type == 'admin') {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => AdminHomePage()),
             (Route<dynamic> route) => false);
       }
     }
@@ -103,9 +118,9 @@ class _LoginState extends State<Login> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.circular(18.0)),
-                                  onPressed: () async {
+                                  onPressed: () {
                                     if (_formkey.currentState.validate()) {
-                                      await signIn(email, password);
+                                      signIn(email, password);
                                     }
                                   },
                                   child: Text(

@@ -23,8 +23,9 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
   }
 
   Future getEmployeeList() async {
-    setState(() async {
-      employee_list = await _employeeService.getEmployees();
+    employee_list = await _employeeService.getEmployees();
+    setState(() {
+      employee_list = employee_list;
     });
     print("Employee list1");
     print(this.employee_list);
@@ -34,13 +35,15 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
   Widget build(BuildContext context) {
     void _showAddEmployeePanel() {
       showModalBottomSheet(
-          context: context,
-          builder: (context) {
-            return Container(
-              child: AddEmployeeForm(),
-              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 60),
-            );
-          });
+        context: context,
+        builder: (context) {
+          return Container(
+            child: AddEmployeeForm(),
+            padding: EdgeInsets.symmetric(vertical: 30, horizontal: 60),
+          );
+        },
+        isScrollControlled: true,
+      );
     }
 
     return Scaffold(

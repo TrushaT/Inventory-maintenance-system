@@ -27,12 +27,12 @@ class EmployeeService {
   Stream<List<Inventory_User>> get employees {
     return userCollection.snapshots().map(_userFromSnapshot);
   }
-
   Future<List<Inventory_User>> getEmployees() async {
     await userCollection
         .where("user_type", isEqualTo: "employee")
         .get()
         .then((value) => value.docs.forEach((element) {
+              print(element);
               employee_list.add(Inventory_User(
                   uid: element.data()['uid'],
                   name: element.data()['name'],
@@ -41,7 +41,28 @@ class EmployeeService {
                   department: element.data()['department'],
                   mobile_number: element.data()['mobile_number'],
                   email: element.data()['email']));
-            }));
+            })
+            );
     return (employee_list);
+  }
+
+// name, user_type, date_of_joining, department, mobile_number,email
+  Future updateUserData(
+      {String uid,
+      String name,
+      String user_type,
+      Timestamp date_of_joining,
+      String department,
+      String mobile_number,
+      String email}) async {
+    return await userCollection.doc(uid).set({
+      'uid': uid,
+      'name': name,
+      'user_type': user_type,
+      'date_of_joining': date_of_joining,
+      'department': department,
+      'mobile_number': mobile_number,
+      'email': email
+    });
   }
 }

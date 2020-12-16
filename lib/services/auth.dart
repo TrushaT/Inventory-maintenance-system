@@ -28,19 +28,21 @@ class AuthService {
 
   Future getUserData(String uid) async {
     DocumentReference ref = userCollection.doc(uid);
+    print("UID");
 
     try {
-      ref.get().then((querySnapshot) async {
-        this.u = await _userFromFirebaseUser(querySnapshot);
+      await ref.get().then((querySnapshot) async {
+        print("Here 1");
+        this.u = _userFromFirebaseUser(querySnapshot);
+        // return this.u;
       });
-      // print(this.u);
       return this.u;
     } catch (e) {
       return null;
     }
   }
 
-  Future signInWithEmailAndPassword(String email, String password) async {
+  Future signInWithEmailAndPassword({String email, String password}) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
@@ -52,6 +54,20 @@ class AuthService {
     }
   }
 
-  //to get the user from userid or email
+  //to create user account
+  Future registerWithEmailAndPassword(String email, String password) async {
+    try {
+      UserCredential result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      User user = result.user;
 
+      //create new document for the user with uid
+      // await DatabaseService(uid: user.uid)
+      //     .updateUserData('0', 'new crew member', 100);
+      return (user);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 }
