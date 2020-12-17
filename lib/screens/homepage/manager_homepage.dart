@@ -79,9 +79,19 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
         Container(
           child: TextField(
             controller: _searchController,
-            decoration: InputDecoration(prefixIcon: Icon(Icons.search)),
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.search),
+              hintText: 'Search by Name',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+            ),
+            style: TextStyle(
+              fontSize: 19,
+            ),
+            autofocus: false,
           ),
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
         ),
         Container(child: EmployeeList(employee_list: results_employee_list))
       ]),
@@ -91,10 +101,8 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
               context,
               MaterialPageRoute(
                   builder: (context) => AddEmployeeForm(widget.department)));
-
         },
         child: Icon(Icons.add),
-        
       ),
     );
   }

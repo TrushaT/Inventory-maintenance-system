@@ -81,25 +81,29 @@ class _AddManagerFormState extends State<AddManagerForm> {
                   }),
               SizedBox(height: 20),
               TextFormField(
-                  decoration:
-                      textInputDecoration.copyWith(hintText: 'Enter Email'),
-                  validator: (val) => val.isEmpty ? 'Please enter email' : null,
-                  onChanged: (val) {
-                    setState(() {
-                      email = val;
-                    });
-                  }),
+                decoration:
+                    textInputDecoration.copyWith(hintText: 'Enter Email'),
+                validator: (val) => val.isEmpty ? 'Please enter email' : null,
+                onChanged: (val) {
+                  setState(() {
+                    email = val;
+                  });
+                },
+                keyboardType: TextInputType.emailAddress,
+              ),
               SizedBox(height: 20),
               TextFormField(
-                  decoration: textInputDecoration.copyWith(
-                      hintText: 'Enter Mobile Number'),
-                  validator: (val) =>
-                      val.isEmpty ? 'Please enter a name' : null,
-                  onChanged: (val) {
-                    setState(() {
-                      mobile_number = val;
-                    });
-                  }),
+                decoration: textInputDecoration.copyWith(
+                    hintText: 'Enter Mobile Number'),
+                validator: (val) =>
+                    val.isEmpty ? 'Please enter a Mobile Number' : null,
+                onChanged: (val) {
+                  setState(() {
+                    mobile_number = val;
+                  });
+                },
+                keyboardType: TextInputType.phone,
+              ),
               SizedBox(height: 20),
               RaisedButton(
                   onPressed: () {
