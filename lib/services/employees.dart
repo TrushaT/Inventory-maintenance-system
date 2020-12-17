@@ -5,6 +5,7 @@ import 'package:inventory_management/models/user.dart';
 
 class EmployeeService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('users');
   List<Inventory_User> employee_list = [];
@@ -13,7 +14,7 @@ class EmployeeService {
     return snapshot.docs.map((doc) {
       if (doc.data()['user_type'] == "employee") {
         return Inventory_User(
-            uid: doc.data()['name'],
+            uid: doc.data()['uid'],
             name: doc.data()['name'],
             user_type: doc.data()['user_type'],
             date_of_joining: doc.data()['date_of_joining'],
@@ -27,9 +28,10 @@ class EmployeeService {
   Stream<List<Inventory_User>> get employees {
     return userCollection.snapshots().map(_userFromSnapshot);
   }
-  Future<List<Inventory_User>> getEmployees() async {
+  Future<List<Inventory_User>> getEmployees(department) async {
     await userCollection
-        .where("user_type", isEqualTo: "employee")
+        .where("user_type", isEqualTo:"employee")
+        .where("department",isEqualTo: department)
         .get()
         .then((value) => value.docs.forEach((element) {
               print(element);

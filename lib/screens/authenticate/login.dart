@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:inventory_management/models/user.dart';
 import 'package:inventory_management/screens/homepage/admin_homepage.dart';
@@ -35,11 +34,13 @@ class _LoginState extends State<Login> {
       //abruptly starting this...
       print("u");
       print(u);
-      print(3);
       if (u.user_type == 'manager') {
+        String department = u.department;
+        print(department);
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => ManagerHomePage()),
+            MaterialPageRoute(
+                builder: (context) => ManagerHomePage(department)),
             (Route<dynamic> route) => false);
       } else if (u.user_type == 'employee') {
         Navigator.pushAndRemoveUntil(

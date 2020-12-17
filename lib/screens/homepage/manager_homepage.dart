@@ -7,6 +7,8 @@ import 'package:inventory_management/services/employees.dart';
 import 'package:provider/provider.dart';
 
 class ManagerHomePage extends StatefulWidget {
+  final String department;
+  const ManagerHomePage(this.department);
   @override
   State<StatefulWidget> createState() {
     return _ManagerHomePageState();
@@ -23,7 +25,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
   }
 
   Future getEmployeeList() async {
-    employee_list = await _employeeService.getEmployees();
+    employee_list = await _employeeService.getEmployees(widget.department);
     setState(() {
       employee_list = employee_list;
     });
@@ -68,10 +70,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                     onPressed: () {
                       _showAddEmployeePanel();
                     },
-                    child: Text(
-                      'Add Employee',
-                      style: TextStyle(fontSize: 20.0, color: Colors.white),
-                    )))
+                    
           ],
         ));
   }
