@@ -4,8 +4,7 @@ import 'package:inventory_management/screens/employee/employee_list.dart';
 import 'package:inventory_management/screens/homepage/employee_homepage.dart';
 import 'package:inventory_management/services/employees.dart';
 import 'package:provider/provider.dart';
-import 'package:inventory_management/shared/fancy_fab.dart';
-
+import 'package:inventory_management/screens/manager/fancy_fab.dart';
 
 class ManagerHomePage extends StatefulWidget {
   final String department;

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_management/screens/manager/add_employee.dart';
+import 'package:inventory_management/screens/manager/delete_employee.dart';
+import 'package:inventory_management/screens/manager/update_employee.dart';
 
 class FancyFab extends StatefulWidget {
   @override
@@ -68,10 +71,14 @@ class _FancyFabState extends State<FancyFab>
 
   Widget add() {
     return new Container(
-
       child: FloatingActionButton(
-        heroTag: "btn1" ,
-        onPressed: null,
+        heroTag: "btn1",
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddEmployee()),
+          );
+        },
         tooltip: 'Add',
         child: Icon(Icons.add),
       ),
@@ -82,7 +89,10 @@ class _FancyFabState extends State<FancyFab>
     return new Container(
       child: FloatingActionButton(
         heroTag: "btn2",
-        onPressed: null,
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => UpdateEmployee()));
+        },
         tooltip: 'Update',
         child: Icon(Icons.create_sharp),
       ),
@@ -93,7 +103,10 @@ class _FancyFabState extends State<FancyFab>
     return new Container(
       child: FloatingActionButton(
         heroTag: "btn3",
-        onPressed: null,
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => DeleteEmployee()));
+        },
         tooltip: 'Delete',
         child: Icon(Icons.delete),
       ),
@@ -137,8 +150,7 @@ class _FancyFabState extends State<FancyFab>
               _translateButton.value,
               0.0,
             ),
-            child: delete()
-            ),
+            child: delete()),
         toggle(),
       ],
     );
