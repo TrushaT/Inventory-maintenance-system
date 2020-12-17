@@ -18,10 +18,44 @@ class ManagerHomePage extends StatefulWidget {
 class _ManagerHomePageState extends State<ManagerHomePage> {
   EmployeeService _employeeService = EmployeeService();
   List<Inventory_User> employee_list;
+  List<Inventory_User> results_employee_list;
 
+  TextEditingController _searchController = TextEditingController();
+
+  @override
   void initState() {
     getEmployeeList();
+    _searchController.addListener(_onSearchChanged);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_onSearchChanged);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _onSearchChanged() {
+    searchResultsList();
+  }
+
+  void searchResultsList() {
+    List<Inventory_User> showResults = [];
+
+    if (_searchController.text != "") {
+      for (var employee in employee_list) {
+        var name = employee.name.toLowerCase();
+        if (name.contains(_searchController.text.toLowerCase())) {
+          showResults.add(employee);
+        }
+      }
+    } else {
+      showResults = List.from(employee_list);
+    }
+    setState(() {
+      results_employee_list = showResults;
+    });
   }
 
   Future getEmployeeList() async {
@@ -29,8 +63,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
     setState(() {
       employee_list = employee_list;
     });
-    print("Employee list1");
-    print(this.employee_list);
+    searchResultsList();
   }
 
   @override
@@ -42,7 +75,14 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
         elevation: 0.0,
       ),
       body: Column(children: [
-        Container(child: EmployeeList(employee_list: employee_list))
+        Container(
+          child: TextField(
+            controller: _searchController,
+            decoration: InputDecoration(prefixIcon: Icon(Icons.search)),
+          ),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+        ),
+        Container(child: EmployeeList(employee_list: results_employee_list))
       ]),
       floatingActionButton: FancyFab(),
     );
