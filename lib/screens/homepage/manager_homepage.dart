@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/models/user.dart';
-import 'package:inventory_management/screens/employee/add_employee_form.dart';
 import 'package:inventory_management/screens/employee/employee_list.dart';
 import 'package:inventory_management/screens/homepage/employee_homepage.dart';
 import 'package:inventory_management/services/employees.dart';
 import 'package:provider/provider.dart';
+import 'package:inventory_management/screens/manager/fancy_fab.dart';
 
 class ManagerHomePage extends StatefulWidget {
   final String department;
@@ -35,44 +35,16 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    void _showAddEmployeePanel() {
-      showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Container(
-            child: AddEmployeeForm(),
-            padding: EdgeInsets.symmetric(vertical: 30, horizontal: 60),
-          );
-        },
-        isScrollControlled: true,
-      );
-    }
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Manager Portal'),
-          backgroundColor: Colors.blueAccent,
-          elevation: 0.0,
-        ),
-        body: Column(
-          children: [
-            Container(
-              child: Text('MANAGER PORTAL'),
-            ),
-            Container(child: EmployeeList(employee_list: employee_list)),
-            ButtonTheme(
-              minWidth: 200.0,
-              height: 40.0,
-              child: RaisedButton(
-                color: Colors.blueAccent,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0)),
-                onPressed: () {
-                  _showAddEmployeePanel();
-                },
-              ),
-            ),
-          ],
-        ));
+      appBar: AppBar(
+        title: Text('Manager Portal'),
+        backgroundColor: Colors.blueAccent,
+        elevation: 0.0,
+      ),
+      body: Column(children: [
+        Container(child: EmployeeList(employee_list: employee_list))
+      ]),
+      floatingActionButton: FancyFab(),
+    );
   }
 }
