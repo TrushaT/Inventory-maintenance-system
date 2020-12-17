@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inventory_management/models/user.dart';
 import 'package:inventory_management/screens/employee/employee_list.dart';
 import 'package:inventory_management/screens/homepage/employee_homepage.dart';
+import 'package:inventory_management/screens/manager/add_employee.dart';
 import 'package:inventory_management/services/employees.dart';
 import 'package:provider/provider.dart';
 import 'package:inventory_management/screens/manager/fancy_fab.dart';
@@ -84,7 +85,17 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
         ),
         Container(child: EmployeeList(employee_list: results_employee_list))
       ]),
-      floatingActionButton: FancyFab(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AddEmployeeForm(widget.department)));
+
+        },
+        child: Icon(Icons.add),
+        
+      ),
     );
   }
 }

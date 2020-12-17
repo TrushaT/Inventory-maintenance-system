@@ -26,6 +26,7 @@ class AuthService {
         email: email);
   }
 
+
   Future getUserData(String uid) async {
     DocumentReference ref = userCollection.doc(uid);
     print("UID");
