@@ -4,6 +4,9 @@ import 'package:inventory_management/screens/manager/delete_employee.dart';
 import 'package:inventory_management/screens/manager/update_employee.dart';
 
 class FancyFab extends StatefulWidget {
+  final String department;
+  const FancyFab(this.department);
+
   @override
   _FancyFabState createState() => _FancyFabState();
 }
@@ -76,7 +79,7 @@ class _FancyFabState extends State<FancyFab>
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddEmployee()),
+            MaterialPageRoute(builder: (context) => AddEmployeeForm(widget.department)),
           );
         },
         tooltip: 'Add',

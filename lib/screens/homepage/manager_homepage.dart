@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inventory_management/models/user.dart';
 import 'package:inventory_management/screens/employee/employee_list.dart';
 import 'package:inventory_management/screens/homepage/employee_homepage.dart';
+import 'package:inventory_management/screens/manager/add_employee.dart';
 import 'package:inventory_management/services/employees.dart';
 import 'package:provider/provider.dart';
 import 'package:inventory_management/screens/manager/fancy_fab.dart';
@@ -35,18 +36,26 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Manager Portal'),
-          backgroundColor: Colors.blueAccent,
-          elevation: 0.0,
-        ),
-        body: Column(
-          children: [
-            Container(child: EmployeeList(employee_list: employee_list))
-            ]),
-        floatingActionButton: FancyFab(),
-        );
+      appBar: AppBar(
+        title: Text('Manager Portal'),
+        backgroundColor: Colors.blueAccent,
+        elevation: 0.0,
+      ),
+      body: Column(children: [
+        Container(child: EmployeeList(employee_list: employee_list))
+      ]),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AddEmployeeForm(widget.department)));
+
+        },
+        child: Icon(Icons.add),
+        
+      ),
+    );
   }
 }
