@@ -61,16 +61,17 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
             ),
             Container(child: EmployeeList(employee_list: employee_list)),
             ButtonTheme(
-                minWidth: 200.0,
-                height: 40.0,
-                child: RaisedButton(
-                    color: Colors.blueAccent,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0)),
-                    onPressed: () {
-                      _showAddEmployeePanel();
-                    },
-                    
+              minWidth: 200.0,
+              height: 40.0,
+              child: RaisedButton(
+                color: Colors.blueAccent,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0)),
+                onPressed: () {
+                  _showAddEmployeePanel();
+                },
+              ),
+            ),
           ],
         ));
   }
