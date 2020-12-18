@@ -50,7 +50,7 @@ class _LoginState extends State<Login> {
       } else if (u.user_type == 'employee') {
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => EmployeeHomePage()),
+            MaterialPageRoute(builder: (context) => HomePage()),
             (Route<dynamic> route) => false);
       } else if (u.user_type == 'admin') {
         Navigator.pushAndRemoveUntil(
