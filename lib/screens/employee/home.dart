@@ -8,6 +8,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   String userId;
   final FirebaseAuth auth = FirebaseAuth.instance;
   Map<String, dynamic> data;
