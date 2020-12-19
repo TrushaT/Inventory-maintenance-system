@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import './form.dart';
+import 'package:inventory_management/services/auth.dart';
 
 class Scanner extends StatefulWidget {
   @override
@@ -21,6 +22,13 @@ class _ScannerState extends State<Scanner> {
   CollectionReference users = FirebaseFirestore.instance.collection('product');
   QRViewController controller;
   User user = FirebaseAuth.instance.currentUser;
+  final AuthService _auth = AuthService();
+
+  Future getdepartment() async {
+  dynamic u = await _auth.getUserData(user.uid);
+  return u.department;
+  
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +59,7 @@ class _ScannerState extends State<Scanner> {
           "scandate": Timestamp.fromDate(DateTime.now()),
           "employee_id": user.uid,
           "product_id": doc.id,
+          "department" :getdepartment(),
         });
         setState(() {
           showProduct = true;

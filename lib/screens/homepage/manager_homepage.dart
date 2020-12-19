@@ -3,6 +3,7 @@ import 'package:inventory_management/models/user.dart';
 import 'package:inventory_management/screens/employee/employee_list.dart';
 import 'package:inventory_management/screens/homepage/employee_homepage.dart';
 import 'package:inventory_management/screens/manager/add_employee.dart';
+import 'package:inventory_management/screens/manager/scanlog.dart';
 import 'package:inventory_management/services/employees.dart';
 import 'package:provider/provider.dart';
 import 'package:inventory_management/screens/manager/fancy_fab.dart';
@@ -74,6 +75,20 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
         title: Text('Manager Portal'),
         backgroundColor: Colors.blueAccent,
         elevation: 0.0,
+        actions: [
+          Padding(
+              padding: EdgeInsets.only(right: 20.0, top: 15.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ScanLog()));
+                },
+                child: Icon(
+                  Icons.assignment,
+                  size: 30.0,
+                ),
+              )),
+        ],
       ),
       body: Column(children: [
         Container(
