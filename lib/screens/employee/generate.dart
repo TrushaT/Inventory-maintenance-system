@@ -1,4 +1,9 @@
+import 'dart:convert';
+import 'dart:ui';
+import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 // import 'package:http/http.dart' as http;
 import 'package:qr_flutter/qr_flutter.dart';
@@ -25,6 +30,8 @@ class _GenerateState extends State<Generate>
   String status;
 
   bool color = false;
+
+  GlobalKey imageKey = GlobalKey();
 
   Color pickerColor = new Color(0xff443a49);
 
@@ -92,6 +99,19 @@ class _GenerateState extends State<Generate>
     setState(() {
       word = documentReference.id;
     });
+  }
+
+  Future<void> shareImage() async {
+    RenderRepaintBoundary imageObject =
+        imageKey.currentContext.findRenderObject();
+    final image = await imageObject.toImage(pixelRatio: 2);
+    ByteData byteData = await image.toByteData(format: ImageByteFormat.png);
+
+    final pngBytes = byteData.buffer.asUint8List();
+    final base64String = base64Encode(pngBytes);
+
+    await Share.file('qr image', 'qr.png', pngBytes, 'image/png',
+        text: 'QR Code for " $productType " of department " $department "');
   }
 
   void _handleOnPressed() {
@@ -222,17 +242,19 @@ class _GenerateState extends State<Generate>
                       ),
                     )
                   : Center(
-                      child: Container(
-                        margin: EdgeInsets.only(
-                            left: 70.0, bottom: 10.0, right: 20.0),
-                        padding: EdgeInsets.only(top: 50),
-                        child: QrImage(
-                          data: word,
-                          version: QrVersions.auto,
-                          foregroundColor: pickerColor,
+                      child: RepaintBoundary(
+                        key: imageKey,
+                        child: Container(
+                          margin: EdgeInsets.only(left: 70.0, bottom: 10.0),
+                          padding: EdgeInsets.only(top: 50),
+                          child: QrImage(
+                              data: word,
+                              version: QrVersions.auto,
+                              foregroundColor: pickerColor,
+                              backgroundColor: Colors.white),
+                          height: 150,
+                          width: 160,
                         ),
-                        height: 150,
-                        width: 150,
                       ),
                     ),
             ],
@@ -392,7 +414,7 @@ class _GenerateState extends State<Generate>
               Container(
                 margin: EdgeInsets.only(bottom: 50),
                 height: 50,
-                width: 300,
+                width: 150,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(100)),
                     color: Color.fromRGBO(0, 180, 245, 1)),
@@ -415,28 +437,30 @@ class _GenerateState extends State<Generate>
                       style: TextStyle(color: Colors.white),
                     )),
               ),
-              // SizedBox(
-              //   height: 15,
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     Container(
-              //       margin: EdgeInsets.only(bottom: 50, left: 20),
-              //       height: 50,
-              //       width: 150,
-              //       decoration: BoxDecoration(
-              //           borderRadius: BorderRadius.all(Radius.circular(100)),
-              //           color: Color.fromRGBO(0, 180, 245, 1)),
-              //       child: FlatButton(
-              //           onPressed: () {},
-              //           child: Text(
-              //             "Save QR",
-              //             style: TextStyle(color: Colors.white),
-              //           )),
-              //     ),
-              //   ],
-              // )
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: 50, left: 20),
+                    height: 50,
+                    width: 150,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(100)),
+                        color: Color.fromRGBO(0, 180, 245, 1)),
+                    child: FlatButton(
+                        onPressed: () {
+                          shareImage();
+                        },
+                        child: Text(
+                          "Save QR",
+                          style: TextStyle(color: Colors.white),
+                        )),
+                  ),
+                ],
+              )
             ],
           ),
         ],
