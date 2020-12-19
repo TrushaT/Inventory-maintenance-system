@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: Colors.blue),
           BottomNavigationBarItem(
               icon: Icon(Icons.camera),
-              label: "Camera",
+              label: "Scan",
               backgroundColor: Colors.blue),
         ],
         onTap: (index) {
