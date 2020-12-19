@@ -14,8 +14,8 @@ import './firebase.dart';
 
 // Create a Form widget.
 class MyCustomForm extends StatefulWidget {
-  final String productId;
-  const MyCustomForm(this.productId);
+  final String productId, productType;
+  const MyCustomForm(this.productId, this.productType);
 
   @override
   MyCustomFormState createState() {
@@ -132,8 +132,12 @@ class MyCustomFormState extends State<MyCustomForm> {
                               borderRadius: BorderRadius.circular(18.0)),
                           color: Colors.green,
                           onPressed: () => {
-                            serviceSetup(widget.productId, textdescription.text,
-                                textcost.text, _dateTime.toString())
+                            serviceSetup(
+                                widget.productId,
+                                textdescription.text,
+                                textcost.text,
+                                _dateTime.toString(),
+                                widget.productType)
                           },
                           child: Text(
                             'Add Service',

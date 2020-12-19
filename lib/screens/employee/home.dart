@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:inventory_management/models/service.dart';
+import 'package:inventory_management/screens/employee/serviceTile.dart';
+import 'package:inventory_management/services/employees.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -8,8 +11,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
+  List<Service> services_list;
+  CollectionReference service =
+      FirebaseFirestore.instance.collection('Services');
   String userId;
+  EmployeeService _employeeService = EmployeeService();
   final FirebaseAuth auth = FirebaseAuth.instance;
   Map<String, dynamic> data;
 
@@ -18,7 +24,38 @@ class _HomeState extends State<Home> {
     final User user = auth.currentUser;
     userId = user.uid;
     print('$userId');
+    getServices();
+
     super.initState();
+  }
+
+//  Future getServices() async {
+//     List<Service> services = [];
+//    await service.getDocuments().then((QuerySnapshot snapshot) => {
+//           snapshot.documents.forEach((DocumentSnapshot doc) {
+//             if (true) {
+//               services.add(new Service(
+//                     doc.data()["uid"],
+//                     doc.data()["product_id"],
+//                     doc.data()["cost"],
+//                     doc.data()["date_of_service"],
+//                     doc.data()["description"],
+//                     doc.documentID,
+//                   ));
+//             }
+//           })
+
+//         });
+//         setState(() {
+//           services_local = services;
+//         });
+//   }
+
+  Future getServices() async {
+    services_list = await _employeeService.getServices(this.userId);
+    setState(() {
+      services_list = services_list;
+    });
   }
 
   // Future getDocs() async {
@@ -44,6 +81,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    print(services_list);
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('Services')
@@ -56,17 +94,16 @@ class _HomeState extends State<Home> {
           );
         }
 
-        return ListView(
-          children: snapshot.data.docs.map((document) {
-            return Center(
-              child: Container(
-                width: MediaQuery.of(context).size.width / 1.2,
-                height: MediaQuery.of(context).size.width / 5,
-                child: Text("Title: " + document['product_id']),
-              ),
-            );
-          }).toList(),
-        );
+        return services_list == null
+            ? Container(child: Text('Loading'))
+            : ListView.builder(
+                itemCount: services_list.length,
+                itemBuilder: (context, index) {
+                  print(services_list[index].service_id);
+                  return Container(
+                    child: ServiceTile(services_list[index]),
+                  );
+                });
       },
     );
   }

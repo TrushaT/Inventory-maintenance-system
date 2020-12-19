@@ -7,7 +7,9 @@ class Service {
   final String date_of_service;
   final String description;
   final String service_id;
+  final String productType;
+
 
   Service(this.uid, this.product_id, this.cost, this.date_of_service,
-      this.description, this.service_id);
+      this.description, this.service_id,this.productType);
 }

@@ -78,7 +78,7 @@ class _ScannerState extends State<Scanner> {
                     setState(() {
                       data = doc.data();
                     });
-                      this.services_local=[];
+                    this.services_local = [];
                     service.getDocuments().then((QuerySnapshot snapshot) => {
                           snapshot.documents.forEach((DocumentSnapshot doc) {
                             if (doc.data()["product_id"] == qrText) {
@@ -89,6 +89,7 @@ class _ScannerState extends State<Scanner> {
                                     doc.data()["date_of_service"],
                                     doc.data()["description"],
                                     doc.documentID,
+                                    doc.data()["productType"],
                                   ));
                             }
                           })
@@ -240,8 +241,8 @@ class _ScannerState extends State<Scanner> {
                                             MaterialPageRoute(builder:
                                                 (BuildContext context) {
                                           print(qrText.toString());
-                                          return MyCustomForm(
-                                              qrText.toString());
+                                          return MyCustomForm(qrText.toString(),
+                                              data["productType"]);
                                         }))
                                       },
                                       color: Colors.white,
