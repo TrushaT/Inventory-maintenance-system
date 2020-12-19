@@ -7,24 +7,26 @@ class ScanService {
   final CollectionReference scanCollection =
       FirebaseFirestore.instance.collection('ScanLog');
 
-  List<Scan> scan_list = [];
+  List<List<dynamic>> scan_list = [];
 
   User user = FirebaseAuth.instance.currentUser;
   final AuthService _auth = AuthService();
 
-  Future getdepartment() async {
-    print('inscanservice - getdepartment');
-    dynamic u = await _auth.getUserData(user.uid);
-    print(u.department.toString());
-    return u.department.toString();
-  }
+  // Future getdepartment() async {
+  //   print('inscanservice - getdepartment');
+  //   dynamic u = await _auth.getUserData(user.uid);
+  //   return u.department.toString();
+  // }
 
-  Future<List<Scan>> getScan() async {
+  Future<List<List<dynamic>>> getScan() async {
     print('inscanservice - getScan');
-    print(getdepartment());
+    dynamic data;
 
+    // print(getdepartment());
+    dynamic u = await _auth.getUserData(user.uid);
+    print(u.department);
     await scanCollection
-        .where("department", isEqualTo: 'CS')
+        .where("department", isEqualTo: u.department)
         .get()
         .then((value) => value.docs.forEach((element) {
               print(element);
@@ -32,12 +34,22 @@ class ScanService {
               print(element.data()['employee_id']);
               print(element.data()['product_id']);
 
-              scan_list.add(Scan(
-                scandate: element.data()['scandate'],
-                employee_id: element.data()['employee_id'],
-                product_id: element.data()['product_id'],
-                department: element.data()['department'],
-              ));
+              FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(element.data()['employee_id'])
+                  .get()
+                  .then((DocumentSnapshot doc) {
+                scan_list.add([
+                  Scan(
+                    scandate: element.data()['scandate'],
+                    employee_id: element.data()['employee_id'],
+                    product_id: element.data()['product_id'],
+                    department: element.data()['department'],
+                  ),
+                  doc.data()
+                ]);
+                print(doc.data()['name']);
+              });
             }));
     print(scan_list);
     return (scan_list);

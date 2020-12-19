@@ -10,7 +10,7 @@ class ScanLog extends StatefulWidget {
 
 class _ScanLogState extends State<ScanLog> {
   ScanService _scanService = ScanService();
-  List<Scan> scan_list;
+  List<List<dynamic>> scan_list;
 
   @override
   void initState() {
@@ -37,6 +37,6 @@ class _ScanLogState extends State<ScanLog> {
           elevation: 0.0,
         ),
         body: Container(child: ScanList(scan_list: scan_list)));
-        //body: Text('Scan Records'));
+    //body: Text('Scan Records'));
   }
 }
