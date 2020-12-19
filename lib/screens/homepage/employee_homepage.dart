@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/screens/employee/form.dart';
+import 'package:inventory_management/screens/employee/home.dart';
 import 'package:inventory_management/screens/employee/scanner.dart';
 import 'package:inventory_management/screens/employee/generate.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -19,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   int pageproduct = 0;
   int pageservice = 0;
   final tabs = [
-    Center(child: Text("Home")),
+    Home(),
     Generate(),
     Scanner(),
   ];

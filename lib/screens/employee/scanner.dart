@@ -17,6 +17,8 @@ class _ScannerState extends State<Scanner> {
   String dateAdded;
   Map<String, dynamic> data;
   CollectionReference users = FirebaseFirestore.instance.collection('product');
+  CollectionReference service =
+      FirebaseFirestore.instance.collection('Services');
   QRViewController controller;
   @override
   Widget build(BuildContext context) {
@@ -185,7 +187,7 @@ class _ScannerState extends State<Scanner> {
                         onPressed: () => {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (BuildContext context) {
-                                print(qrText.toString());
+                            print(qrText.toString());
                             return MyCustomForm(qrText.toString());
                           }))
                         },
