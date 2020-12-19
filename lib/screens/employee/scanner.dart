@@ -30,10 +30,10 @@ class _ScannerState extends State<Scanner> {
   final AuthService _auth = AuthService();
 
   Future getdepartment() async {
-  dynamic u = await _auth.getUserData(user.uid);
-  return u.department;
-  
+    dynamic u = await _auth.getUserData(user.uid);
+    return u.department;
   }
+
   List<Service> services;
   List<Service> services_local = [];
 
@@ -66,11 +66,20 @@ class _ScannerState extends State<Scanner> {
                     .get()
                     .then((DocumentSnapshot doc) {
                   if (doc.exists) {
-                    FirebaseFirestore.instance.collection("ScanLog").add({
-                      "scandate": Timestamp.fromDate(DateTime.now()),
-                      "employee_id": user.uid,
-                      "product_id": doc.id,
+                    FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(user.uid)
+                        .get()
+                        .then((DocumentSnapshot udoc) {
+                      FirebaseFirestore.instance.collection("ScanLog").add({
+                        "scandate": Timestamp.fromDate(DateTime.now()),
+                        "employee_id": user.uid,
+                        "product_id": doc.id,
+                        "employee_name": udoc.data()['name'],
+                        "department": udoc.data()['department'],
+                      });
                     });
+
                     setState(() {
                       showProduct = true;
                     });

@@ -7,7 +7,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 void main() {
-  runApp(MaterialApp(title: 'employee app', home: HomePage()));
+  runApp(MaterialApp(title: 'Employee App', home: HomePage()));
 }
 
 class HomePage extends StatefulWidget {
@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: "home",
+              label: "Home",
               backgroundColor: Colors.blue),
           BottomNavigationBarItem(
               icon: Icon(Icons.add),

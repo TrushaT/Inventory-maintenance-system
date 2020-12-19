@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:inventory_management/models/service.dart';
 import 'package:inventory_management/screens/employee/serviceTile.dart';
 import 'package:inventory_management/services/employees.dart';
+import 'package:inventory_management/shared/loading.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -95,7 +96,7 @@ class _HomeState extends State<Home> {
         }
 
         return services_list == null
-            ? Container(child: Text('Loading'))
+            ? Container(child: Loading())
             : ListView.builder(
                 itemCount: services_list.length,
                 itemBuilder: (context, index) {

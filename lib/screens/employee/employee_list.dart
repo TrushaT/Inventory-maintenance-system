@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/models/user.dart';
 import 'package:inventory_management/screens/employee/employee_tile.dart';
+import 'package:inventory_management/shared/loading.dart';
 import 'package:provider/provider.dart';
 
 class EmployeeList extends StatefulWidget {
@@ -17,9 +18,9 @@ class _EmployeeListState extends State<EmployeeList> {
     // final employees = Provider.of<List<Inventory_User>>(context) ?? [];
     // print("From Provider");
     // print(employees);
-   
+
     return widget.employee_list == null
-        ? Container(child: Text('Loading'))
+        ? Container(child: Loading())
         : Expanded(
             child: ListView.builder(
                 itemCount: widget.employee_list.length,

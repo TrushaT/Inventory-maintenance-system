@@ -3,10 +3,10 @@ import 'package:inventory_management/models/service.dart';
 import 'package:inventory_management/models/user.dart';
 import 'package:inventory_management/screens/employee/employee_tile.dart';
 import 'package:inventory_management/screens/employee/serviceTile.dart';
+import 'package:inventory_management/shared/loading.dart';
 import 'package:provider/provider.dart';
 
 class ServiceList extends StatefulWidget {
-  
   final List<Service> service_list;
   ServiceList(this.service_list);
 
@@ -20,13 +20,11 @@ class _ServiceListState extends State<ServiceList> {
     // final employees = Provider.of<List<Inventory_User>>(context) ?? [];
     // print("From Provider");
     // print(employees);
-   
+
     return widget.service_list == null
-        ? Container(child: Text('Loading'))
+        ? Container(child: Loading())
         : Scaffold(
-          appBar: AppBar(
-            title:Text("Employee Pannel")
-          ),
+            appBar: AppBar(title: Text("Employee Pannel")),
             body: ListView.builder(
                 itemCount: widget.service_list.length,
                 itemBuilder: (context, index) {

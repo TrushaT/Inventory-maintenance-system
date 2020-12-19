@@ -7,7 +7,7 @@ class ScanService {
   final CollectionReference scanCollection =
       FirebaseFirestore.instance.collection('ScanLog');
 
-  List<List<dynamic>> scan_list = [];
+  List<Scan> scan_list = [];
 
   User user = FirebaseAuth.instance.currentUser;
   final AuthService _auth = AuthService();
@@ -18,9 +18,8 @@ class ScanService {
   //   return u.department.toString();
   // }
 
-  Future<List<List<dynamic>>> getScan() async {
+  Future<List<Scan>> getScan() async {
     print('inscanservice - getScan');
-    dynamic data;
 
     // print(getdepartment());
     dynamic u = await _auth.getUserData(user.uid);
@@ -29,27 +28,34 @@ class ScanService {
         .where("department", isEqualTo: u.department)
         .get()
         .then((value) => value.docs.forEach((element) {
-              print(element);
-              print(element.data()['scandate']);
-              print(element.data()['employee_id']);
-              print(element.data()['product_id']);
+              if (element.exists) {
+                print(element);
+                print(element.data()['scandate']);
+                print(element.data()['employee_id']);
+                print(element.data()['product_id']);
+                print(element.data()['employee_name']);
 
-              FirebaseFirestore.instance
-                  .collection('users')
-                  .doc(element.data()['employee_id'])
-                  .get()
-                  .then((DocumentSnapshot doc) {
-                scan_list.add([
-                  Scan(
-                    scandate: element.data()['scandate'],
-                    employee_id: element.data()['employee_id'],
-                    product_id: element.data()['product_id'],
-                    department: element.data()['department'],
-                  ),
-                  doc.data()
-                ]);
-                print(doc.data()['name']);
-              });
+                scan_list.add(Scan(
+                  scandate: element.data()['scandate'],
+                  employee_id: element.data()['employee_id'],
+                  product_id: element.data()['product_id'],
+                  department: element.data()['department'],
+                  employee_name: element.data()['employee_name'],
+                ));
+              }
+
+              // FirebaseFirestore.instance
+              //     .collection('users')
+              //     .doc(element.data()['employee_id'])
+              //     .get()
+              //     .then((DocumentSnapshot doc) {
+              //   scan_list.add(Scan(
+              //     scandate: element.data()['scandate'],
+              //     employee_id: element.data()['employee_id'],
+              //     product_id: element.data()['product_id'],
+              //     department: element.data()['department'],
+              //     employee_name: element.data()['employee_name'],
+              //   ));
             }));
     print(scan_list);
     return (scan_list);

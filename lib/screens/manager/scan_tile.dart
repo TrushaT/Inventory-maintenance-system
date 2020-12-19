@@ -5,14 +5,14 @@ import 'package:inventory_management/services/auth.dart';
 import 'package:inventory_management/models/user.dart';
 
 class ScanTile extends StatelessWidget {
-  final List scan;
+  final Scan scan;
   ScanTile({this.scan});
 
   User user = FirebaseAuth.instance.currentUser;
   final AuthService _auth = AuthService();
 
   Future<String> getname() async {
-    dynamic u = await _auth.getUserData(scan[0].employee_id);
+    dynamic u = await _auth.getUserData(scan.employee_id);
     return u.name;
   }
 
@@ -23,8 +23,9 @@ class ScanTile extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
         child: ListTile(
-          title: Text(scan[1]['name'].toString()),
-          subtitle: Text(scan[0].scandate.toDate().toString().substring(0, 19)),
+          title: Text(scan.employee_name
+              .toString()), // TODO: Also mention Product Name and etc. & On click of Product view details
+          subtitle: Text(scan.scandate.toDate().toString().substring(0, 19)),
         ),
       ),
     );

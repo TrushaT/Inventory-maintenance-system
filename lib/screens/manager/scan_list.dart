@@ -4,7 +4,7 @@ import 'scan_tile.dart';
 import 'package:inventory_management/shared/loading.dart';
 
 class ScanList extends StatefulWidget {
-  List<List<dynamic>> scan_list;
+  List<Scan> scan_list;
   ScanList({this.scan_list});
 
   @override
@@ -17,7 +17,7 @@ class _ScanListState extends State<ScanList> {
     print('inscanlist');
     print(widget.scan_list);
     return widget.scan_list == null
-        ? Container(child: Text('Loading'))
+        ? Container(child: Loading())
         : Column(
             children: [
               Expanded(

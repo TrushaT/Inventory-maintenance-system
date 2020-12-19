@@ -10,7 +10,7 @@ class ScanLog extends StatefulWidget {
 
 class _ScanLogState extends State<ScanLog> {
   ScanService _scanService = ScanService();
-  List<List<dynamic>> scan_list;
+  List<Scan> scan_list;
 
   @override
   void initState() {
