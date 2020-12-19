@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_management/screens/employee/form.dart';
 import 'package:inventory_management/screens/employee/scanner.dart';
 import 'package:inventory_management/screens/employee/generate.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -15,22 +16,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentindex = 0;
+  int pageproduct = 0;
+  int pageservice = 0;
   final tabs = [
-    Center(child: Text('Home')),
+    Center(child: Text("Home")),
     Generate(),
     Scanner(),
   ];
-
-  Future scanBarcode() async {
-    await FlutterBarcodeScanner.scanBarcode(
-            "#fff666", "Cancel", true, ScanMode.QR)
-        .then((value) => {
-              print(value),
-              setState(() {
-                _currentindex = int.parse(value);
-              })
-            });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +31,6 @@ class _HomePageState extends State<HomePage> {
         title: Text("Employee Panel"),
       ),
       body: tabs[_currentindex],
-      floatingActionButton: FloatingActionButton(
-        onPressed: scanBarcode,
-        child: Icon(Icons.camera),
-      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentindex,
         type: BottomNavigationBarType.fixed,
@@ -63,6 +51,8 @@ class _HomePageState extends State<HomePage> {
         onTap: (index) {
           setState(() {
             _currentindex = index;
+            pageproduct = 0;
+            pageservice = 0;
           });
         },
       ),
