@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   int _currentindex = 0;
   int pageproduct = 0;
   int pageservice = 0;
-  
+
   final tabs = [
     Center(child: Text("Home")),
     Generate(),
