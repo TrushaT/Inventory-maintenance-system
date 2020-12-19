@@ -41,7 +41,9 @@ class EmployeeService {
                     doc.data()["date_of_service"],
                     doc.data()["description"],
                     doc.documentID,
+                    doc.data()["productType"]
                   ));
+
       }));
       return service_list;
    }

@@ -16,7 +16,8 @@ class ServiceTile extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
         child: ListTile(
-          title: Text("${_dateTime.day}-${_dateTime.month}-${_dateTime.year}"),
+          title: Text(
+              "${service.productType} ${_dateTime.day}-${_dateTime.month}-${_dateTime.year}"),
           subtitle: Text(service.description),
           leading: CircleAvatar(
             radius: 25,
