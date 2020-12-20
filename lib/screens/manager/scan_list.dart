@@ -18,7 +18,14 @@ class _ScanListState extends State<ScanList> {
     print(widget.scan_list);
     return widget.scan_list == null
         ? Container(child: Loading())
-        : Column(
+        :widget.scan_list.length == 0 ?
+        Center(
+                child :Container(
+                child: Text('No Employees',style: TextStyle(
+                color: Colors.black,
+                fontSize: 25,
+              ),)))
+              : Column(
             children: [
               Expanded(
                   child: ListView.builder(

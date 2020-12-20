@@ -8,15 +8,7 @@ class ScanTile extends StatelessWidget {
   final Scan scan;
   ScanTile({this.scan});
 
-  User user = FirebaseAuth.instance.currentUser;
-  final AuthService _auth = AuthService();
-
-  Future<String> getname() async {
-    dynamic u = await _auth.getUserData(scan.employee_id);
-    return u.name;
-  }
-
-  @override
+@override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: 8.0),
