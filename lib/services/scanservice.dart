@@ -26,6 +26,7 @@ class ScanService {
     print(u.department);
     await scanCollection
         .where("department", isEqualTo: u.department)
+        .orderBy('scandate', descending: true)
         .get()
         .then((value) => value.docs.forEach((element) {
               if (element.exists) {
