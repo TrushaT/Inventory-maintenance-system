@@ -8,6 +8,7 @@ import 'package:inventory_management/screens/employee/generate.dart';
 import 'package:inventory_management/services/auth.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:inventory_management/screens/employee/sheets.dart';
 
 void main() {
   runApp(MaterialApp(title: 'Employee App', home: HomePage()));
