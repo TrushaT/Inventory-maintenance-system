@@ -10,7 +10,7 @@ class ServiceTile extends StatelessWidget {
   ServiceTile(this.service);
   @override
   Widget build(BuildContext context) {
-    final DateTime _dateTime = DateTime.parse(service.date_of_service);
+    final DateTime _dateTime = service.date_of_service.toDate();
     return Padding(
       padding: EdgeInsets.only(top: 8.0),
       child: Card(

@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-Future<void> serviceSetup(
-    String productid, String description, String cost, String date, String productType) async {
+Future<void> serviceSetup(String productid, String description, String cost,
+    Timestamp date, String productType,bool status) async {
   CollectionReference users = FirebaseFirestore.instance.collection('Services');
   FirebaseAuth auth = FirebaseAuth.instance;
   String uid = auth.currentUser.uid.toString();
@@ -12,7 +12,8 @@ Future<void> serviceSetup(
     'cost': cost,
     'date_of_service': date,
     "uid": uid,
-    "productType":productType
+    "productType": productType,
+    "status":status
   });
   return;
 }

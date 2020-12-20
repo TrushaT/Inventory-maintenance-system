@@ -103,6 +103,7 @@ class _ScannerState extends State<Scanner> {
                                     doc.data()["description"],
                                     doc.documentID,
                                     doc.data()["productType"],
+                                    doc.data()["status"]
                                   ));
                             }
                           })

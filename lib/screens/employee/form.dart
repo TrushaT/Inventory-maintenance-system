@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:inventory_management/shared/constants.dart';
 import 'package:inventory_management/shared/toast.dart';
 import './firebase.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
 // class FormApp extends StatelessWidget {
 //   const FormApp({Key key}) : super(key: key);
@@ -37,8 +39,9 @@ class MyCustomFormState extends State<MyCustomForm> {
   final textdescription = new TextEditingController();
   final textcost = new TextEditingController();
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
-  DateTime _dateTime;
+  Timestamp _dateTime;
   CustomToast toast = CustomToast();
+  bool status;
 
   @override
   Widget build(BuildContext context) {
@@ -83,11 +86,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                       SizedBox(height: size.height * 0.04),
                       Container(
                         margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                        child: Text(_dateTime == null
-                            ? 'Nothing has been picked yet'
-                            : "${_dateTime.day}-${_dateTime.month}-${_dateTime.year}"),
+                        child: Text("Choose Product Arrival Date"),
                       ),
-                      SizedBox(height: size.height * 0.04),
+                      SizedBox(height: size.height * 0.03),
                       Row(
                         children: [
                           ButtonTheme(
@@ -112,7 +113,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                                         lastDate: DateTime(2021))
                                     .then((date) {
                                   setState(() {
-                                    _dateTime = date;
+                                    _dateTime = Timestamp.fromDate(date);
                                   });
                                 });
                               },
@@ -122,9 +123,30 @@ class MyCustomFormState extends State<MyCustomForm> {
                             margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
                             child: Text(_dateTime == null
                                 ? 'Nothing has been picked yet'
-                                : "${_dateTime.day}-${_dateTime.month}-${_dateTime.year}"),
+                                : "${_dateTime.toDate().day}-${_dateTime.toDate().month}-${_dateTime.toDate().year}"),
                           ),
                         ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                        child: Text("Choose Service Status"),
+                      ),
+                      SizedBox(height: size.height * 0.01),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        child: LiteRollingSwitch(
+                          value: false,
+                          textOn: "active",
+                          textOff: "inactive",
+                          colorOn: Colors.green,
+                          colorOff: Colors.red,
+                          iconOn: Icons.done,
+                          textSize: 16.0,
+                          iconOff: Icons.crop_square_sharp,
+                          onChanged: (bool position) {
+                            this.status = position;
+                          },
+                        ),
                       ),
                       SizedBox(height: size.height * 0.03),
                       ButtonTheme(
@@ -139,8 +161,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                                   widget.productId,
                                   textdescription.text,
                                   textcost.text,
-                                  _dateTime.toString(),
-                                  widget.productType);
+                                  _dateTime,
+                                  widget.productType,
+                                  this.status);
                               toast.showToast('Service Details Added',
                                   Colors.green, Colors.white);
                             },

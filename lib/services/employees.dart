@@ -32,25 +32,29 @@ class EmployeeService {
   Stream<List<Inventory_User>> get employees {
     return userCollection.snapshots().map(_userFromSnapshot);
   }
-   Future<List<Service>> getServices(userId) async {
-      await serviceCollection.where("uid", isEqualTo:userId).get().then((value) => value.docs.forEach((doc) {
-         service_list.add( Service(
-                    doc.data()["uid"],
-                    doc.data()["product_id"],
-                    doc.data()["cost"],
-                    doc.data()["date_of_service"],
-                    doc.data()["description"],
-                    doc.documentID,
-                    doc.data()["productType"]
-                  ));
 
-      }));
-      return service_list;
-   }
+  Future<List<Service>> getServices(userId) async {
+    await serviceCollection
+        .where("uid", isEqualTo: userId)
+        .get()
+        .then((value) => value.docs.forEach((doc) {
+              service_list.add(Service(
+                  doc.data()["uid"],
+                  doc.data()["product_id"],
+                  doc.data()["cost"],
+                  doc.data()["date_of_service"],
+                  doc.data()["description"],
+                  doc.documentID,
+                  doc.data()["productType"],
+                  doc.data()["status"]));
+            }));
+    return service_list;
+  }
+
   Future<List<Inventory_User>> getEmployees(department) async {
     await userCollection
-        .where("user_type", isEqualTo:"employee")
-        .where("department",isEqualTo: department)
+        .where("user_type", isEqualTo: "employee")
+        .where("department", isEqualTo: department)
         .get()
         .then((value) => value.docs.forEach((element) {
               print(element);
@@ -62,8 +66,7 @@ class EmployeeService {
                   department: element.data()['department'],
                   mobile_number: element.data()['mobile_number'],
                   email: element.data()['email']));
-            })
-            );
+            }));
     return (employee_list);
   }
 
