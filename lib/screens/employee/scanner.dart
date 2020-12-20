@@ -240,7 +240,7 @@ class _ScannerState extends State<Scanner> {
                             ))
                         : Scaffold(
                             appBar: AppBar(
-                                title: Text('Employee Pannel'),
+                                title: Text('Employee Panel'),
                                 actions: <Widget>[]),
                             body: Text('Error, Product not found!'),
                           );
