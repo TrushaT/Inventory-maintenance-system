@@ -93,7 +93,7 @@ class _HomeState extends State<Home> {
       stream: FirebaseFirestore.instance
           .collection('Services')
           .where('uid', isEqualTo: userId)
-          // .orderBy('date_of_service', descending: true)
+          .orderBy('date_of_service', descending: true)
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData) {
