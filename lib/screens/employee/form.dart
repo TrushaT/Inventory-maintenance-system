@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:inventory_management/shared/constants.dart';
 import './firebase.dart';
 
 // class FormApp extends StatelessWidget {
@@ -12,8 +14,8 @@ import './firebase.dart';
 
 // Create a Form widget.
 class MyCustomForm extends StatefulWidget {
-  final String productId;
-  const MyCustomForm(this.productId);
+  final String productId, productType;
+  const MyCustomForm(this.productId, this.productType);
 
   @override
   MyCustomFormState createState() {
@@ -33,6 +35,7 @@ class MyCustomFormState extends State<MyCustomForm> {
   final text = new TextEditingController();
   final textdescription = new TextEditingController();
   final textcost = new TextEditingController();
+  final DateFormat formatter = DateFormat('yyyy-MM-dd');
   DateTime _dateTime;
 
   @override
@@ -48,59 +51,102 @@ class MyCustomFormState extends State<MyCustomForm> {
             ),
             body: Form(
               key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  
-                  TextFormField(
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                      decoration:
-                          InputDecoration(hintText: 'Enter Your Details'),
-                      controller: textdescription),
-                  SizedBox(height: size.height * 0.03),
-                  TextFormField(
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                      decoration:
-                          InputDecoration(hintText: 'Enter Your Details'),
-                      controller: textcost),
-                  Text(_dateTime == null
-                      ? 'Nothing has been picked yet'
-                      : _dateTime.toString()),
-                  RaisedButton(
-                    child: Text('Pick a date'),
-                    onPressed: () {
-                      showDatePicker(
-                              context: context,
-                              initialDate: _dateTime == null
-                                  ? DateTime.now()
-                                  : _dateTime,
-                              firstDate: DateTime(2001),
-                              lastDate: DateTime(2021))
-                          .then((date) {
-                        setState(() {
-                          _dateTime = date;
-                        });
-                      });
-                    },
-                  ),
-                  SizedBox(height: size.height * 0.03),
-                  RaisedButton(
-                      onPressed: () => {
-                            serviceSetup(widget.productId, textdescription.text,
-                                textcost.text, _dateTime.toString())
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 40, horizontal: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    TextFormField(
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                        decoration: textInputDecoration.copyWith(
+                            hintText: 'Please Enter Service Description'),
+                        controller: textdescription),
+                    SizedBox(height: size.height * 0.03),
+                    TextFormField(
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                        decoration: textInputDecoration.copyWith(
+                            hintText: 'Please Enter Service Cost'),
+                        controller: textcost),
+                    SizedBox(height: size.height * 0.04),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: Text(_dateTime == null
+                          ? 'Nothing has been picked yet'
+                          : "${_dateTime.day}-${_dateTime.month}-${_dateTime.year}"),
+                    ),
+                    SizedBox(height: size.height * 0.04),
+                    Row(
+                      children: [
+                        ButtonTheme(
+                          height: 50.0,
+                          child: RaisedButton(
+                            child: IconTheme(
+                              data: IconThemeData(color: Colors.white),
+                              child: Icon(
+                                Icons.calendar_today,
+                                color: Colors.white,
+                              ),
+                            ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0)),
+                            onPressed: () {
+                              showDatePicker(
+                                      context: context,
+                                      initialDate: _dateTime == null
+                                          ? DateTime.now()
+                                          : _dateTime,
+                                      firstDate: DateTime(2001),
+                                      lastDate: DateTime(2021))
+                                  .then((date) {
+                                setState(() {
+                                  _dateTime = date;
+                                });
+                              });
+                            },
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          child: Text(_dateTime == null
+                              ? 'Nothing has been picked yet'
+                              : "${_dateTime.day}-${_dateTime.month}-${_dateTime.year}"),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: size.height * 0.03),
+                    ButtonTheme(
+                        height: 50.0,
+                        minWidth: 250,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0)),
+                          color: Colors.green,
+                          onPressed: () => {
+                            serviceSetup(
+                                widget.productId,
+                                textdescription.text,
+                                textcost.text,
+                                _dateTime.toString(),
+                                widget.productType)
                           },
-                      child: Text("Submit"))
-                ],
+                          child: Text(
+                            'Add Service',
+                            style:
+                                TextStyle(fontSize: 20.0, color: Colors.white),
+                          ),
+                        ))
+                  ],
+                ),
               ),
             )));
   }

@@ -29,11 +29,11 @@ class AuthService {
 
   Future getUserData(String uid) async {
     DocumentReference ref = userCollection.doc(uid);
-    print("UID");
+    // print("UID");
 
     try {
       await ref.get().then((querySnapshot) async {
-        print("Here 1");
+        // print("Here 1");
         this.u = _userFromFirebaseUser(querySnapshot);
         // return this.u;
       });

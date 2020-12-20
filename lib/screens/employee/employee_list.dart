@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/models/user.dart';
 import 'package:inventory_management/screens/employee/employee_tile.dart';
+import 'package:inventory_management/shared/loading.dart';
 import 'package:provider/provider.dart';
 
 class EmployeeList extends StatefulWidget {
@@ -19,7 +20,14 @@ class _EmployeeListState extends State<EmployeeList> {
     // print(employees);
 
     return widget.employee_list == null
-        ? Container(child: Text('Loading'))
+        ? Container(child: Loading())
+        : widget.employee_list.length == 0 ?
+        Center(
+                child :Container(
+                child: Text('No Employees',style: TextStyle(
+                color: Colors.black,
+                fontSize: 25,
+              ),)))
         : Expanded(
             child: ListView.builder(
                 itemCount: widget.employee_list.length,

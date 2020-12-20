@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory_management/models/service.dart';
 import 'package:inventory_management/models/user.dart';
 
 class EmployeeService {
@@ -8,7 +9,10 @@ class EmployeeService {
 
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('users');
+  final CollectionReference serviceCollection =
+      FirebaseFirestore.instance.collection('Services');
   List<Inventory_User> employee_list = [];
+  List<Service> service_list = [];
 
   List<Inventory_User> _userFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
@@ -28,6 +32,21 @@ class EmployeeService {
   Stream<List<Inventory_User>> get employees {
     return userCollection.snapshots().map(_userFromSnapshot);
   }
+   Future<List<Service>> getServices(userId) async {
+      await serviceCollection.where("uid", isEqualTo:userId).get().then((value) => value.docs.forEach((doc) {
+         service_list.add( Service(
+                    doc.data()["uid"],
+                    doc.data()["product_id"],
+                    doc.data()["cost"],
+                    doc.data()["date_of_service"],
+                    doc.data()["description"],
+                    doc.documentID,
+                    doc.data()["productType"]
+                  ));
+
+      }));
+      return service_list;
+   }
   Future<List<Inventory_User>> getEmployees(department) async {
     await userCollection
         .where("user_type", isEqualTo:"employee")
