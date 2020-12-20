@@ -8,6 +8,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 // import 'package:http/http.dart' as http;
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Generate extends StatefulWidget {
   @override
@@ -112,6 +113,16 @@ class _GenerateState extends State<Generate>
 
     await Share.file('qr image', 'qr.png', pngBytes, 'image/png',
         text: 'QR Code for " $productType " of department " $department "');
+  }
+
+  void showToast() {
+    Fluttertoast.showToast(
+        msg: 'QR code for product is generated!',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIos: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white);
   }
 
   void _handleOnPressed() {
@@ -238,7 +249,6 @@ class _GenerateState extends State<Generate>
                         padding: EdgeInsets.only(top: 50),
                         height: 150,
                         width: 150,
-                        child: Image.asset('assets/qr.png'),
                       ),
                     )
                   : Center(
@@ -431,6 +441,7 @@ class _GenerateState extends State<Generate>
                         cost = myControllerCost.text;
                       });
                       postData();
+                      showToast();
                     },
                     child: Text(
                       "Generate QR",
