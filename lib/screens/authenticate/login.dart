@@ -22,6 +22,7 @@ class _LoginState extends State<Login> {
   String password = '';
   final _formkey = GlobalKey<FormState>();
   bool loading = false;
+  String error = '';
 
   Future signIn(String email, String password) async {
     print(1);
@@ -32,6 +33,7 @@ class _LoginState extends State<Login> {
     if (result == null) {
       setState(() {
         loading = false;
+        error = 'Invalid credentials! Could not sign in!';
       });
       print("error");
     } else {
@@ -118,7 +120,17 @@ class _LoginState extends State<Login> {
                                 obscureText: true,
                               ),
                               SizedBox(height: size.height * 0.03),
-                              SizedBox(height: 20),
+                              // SizedBox(height: 20),
+                              error == ''
+                                  ? SizedBox(height: 1)
+                                  : Container(
+                                      child: Text(
+                                        error,
+                                        style: TextStyle(
+                                            color: Colors.red, fontSize: 14.0),
+                                      ),
+                                      margin: const EdgeInsets.only(bottom: 15),
+                                    ),
                               ButtonTheme(
                                   minWidth: 200.0,
                                   height: 50.0,

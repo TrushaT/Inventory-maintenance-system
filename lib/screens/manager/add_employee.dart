@@ -7,6 +7,7 @@ import 'package:inventory_management/services/employees.dart';
 import 'package:inventory_management/shared/constants.dart';
 import 'package:inventory_management/models/user.dart';
 import 'package:inventory_management/shared/loading.dart';
+import 'package:inventory_management/shared/toast.dart';
 
 class AddEmployeeForm extends StatefulWidget {
   final String department;
@@ -20,6 +21,7 @@ class _AddEmployeeFormState extends State<AddEmployeeForm> {
   final _formkey = GlobalKey<FormState>();
   final AuthService authService = AuthService();
   bool loading = false;
+  CustomToast toast = CustomToast();
 
   String name;
   final String user_type = 'employee';
@@ -45,9 +47,7 @@ class _AddEmployeeFormState extends State<AddEmployeeForm> {
         department: department,
         mobile_number: mobile_number,
         email: email);
-    // setState(() {
-    //   loading = false;
-    // });
+    toast.showToast('Employee Added', Colors.grey[700], Colors.white);
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => ManagerHomePage(department)),

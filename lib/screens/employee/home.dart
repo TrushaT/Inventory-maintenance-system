@@ -82,11 +82,18 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    Container(
+      child: Center(
+        child: Text('Your Recent Services'),
+      ),
+      padding: EdgeInsets.all(5),
+    );
     print(services_list);
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('Services')
           .where('uid', isEqualTo: userId)
+          // .orderBy('date_of_service', descending: true)
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData) {
