@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:inventory_management/shared/constants.dart';
@@ -49,7 +50,7 @@ class MyCustomFormState extends State<MyCustomForm> {
         title: 'Service',
         home: Scaffold(
             appBar: AppBar(
-              title: Text("Employee Pannel"),
+              title: Text("Employee Panel"),
             ),
             body: SingleChildScrollView(
               child: Form(
@@ -139,7 +140,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                                   widget.productId,
                                   textdescription.text,
                                   textcost.text,
-                                  _dateTime.toString(),
+                                  Timestamp.fromDate(_dateTime),
                                   widget.productType);
                               toast.showToast('Service Details Added',
                                   Colors.green, Colors.white);
