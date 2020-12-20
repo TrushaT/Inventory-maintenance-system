@@ -5,6 +5,7 @@ import 'package:inventory_management/screens/employee/scanner.dart';
 import 'package:inventory_management/screens/employee/generate.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:inventory_management/screens/employee/sheets.dart';
 
 void main() {
   runApp(MaterialApp(title: 'Employee App', home: HomePage()));
@@ -31,6 +32,20 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Employee Panel"),
+        actions: [
+          Padding(
+              padding: EdgeInsets.only(right: 20.0, top: 15.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Sheets()));
+                },
+                child: Icon(
+                  Icons.assignment,
+                  size: 30.0,
+                ),
+              )),
+        ],
       ),
       body: tabs[_currentindex],
       bottomNavigationBar: BottomNavigationBar(
