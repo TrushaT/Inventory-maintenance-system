@@ -37,11 +37,8 @@ dependencies:
   intl:
   esys_flutter_share:
   fluttertoast: ^3.1.0
-<<<<<<< HEAD
   lite_rolling_switch:  
-=======
   animated_splash_screen: ^1.0.1+2
->>>>>>> 046ecce79b2fcc93cb696e014bf21207b377eb24
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
