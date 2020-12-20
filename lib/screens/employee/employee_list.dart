@@ -21,6 +21,13 @@ class _EmployeeListState extends State<EmployeeList> {
 
     return widget.employee_list == null
         ? Container(child: Loading())
+        : widget.employee_list.length == 0 ?
+        Center(
+                child :Container(
+                child: Text('No Employees',style: TextStyle(
+                color: Colors.black,
+                fontSize: 25,
+              ),)))
         : Expanded(
             child: ListView.builder(
                 itemCount: widget.employee_list.length,
