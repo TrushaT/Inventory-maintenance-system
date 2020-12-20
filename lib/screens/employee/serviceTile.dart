@@ -22,7 +22,7 @@ class ServiceTile extends StatelessWidget {
           leading: CircleAvatar(
             radius: 25,
             backgroundColor: Colors.blueAccent,
-            child: Image.asset('assets/profile.jpg'),
+            child: Image.asset('assets/service.jpg'),
           ),
         ),
       ),
