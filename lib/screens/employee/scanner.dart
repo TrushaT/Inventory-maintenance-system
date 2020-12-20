@@ -109,7 +109,7 @@ class _ScannerState extends State<Scanner> {
                     return showProduct
                         ? Scaffold(
                             appBar: AppBar(
-                                title: Text('Employee Pannel'),
+                                title: Text('Employee Panel'),
                                 actions: <Widget>[]),
                             body: SingleChildScrollView(
                               child: Container(
@@ -118,7 +118,7 @@ class _ScannerState extends State<Scanner> {
                                   Container(
                                     child: Center(
                                       child: Text(
-                                        "Product Name",
+                                        "Product Details",
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 30),
@@ -128,118 +128,57 @@ class _ScannerState extends State<Scanner> {
                                     decoration: myBoxDecoration(),
                                   ),
                                   Container(
-                                    child: Text(
-                                      "Product Description  :",
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                    alignment: Alignment.centerLeft,
-                                    padding: const EdgeInsets.all(10),
-                                    margin: EdgeInsets.fromLTRB(5, 15, 0, 0),
-                                  ),
+                                      child: ListTile(
+                                    title: Text('Product Description'),
+                                    subtitle: Text(data['description']),
+                                  )),
                                   Container(
-                                    child: Center(
-                                      child: Text(data["description"],
-                                          style: TextStyle(fontSize: 16),
-                                          textAlign: TextAlign.justify),
-                                    ),
-                                    padding: const EdgeInsets.all(25),
-                                    decoration: myBoxDecoration(),
-                                  ),
+                                      child: ListTile(
+                                    title: Text('Product Status'),
+                                    subtitle: Text(data['status']),
+                                  )),
                                   Container(
-                                    child: Text(
-                                        "Product Status  :  " + data["status"],
-                                        style: TextStyle(fontSize: 20),
-                                        textAlign: TextAlign.justify),
-                                    alignment: Alignment.centerLeft,
-                                    padding: const EdgeInsets.all(20),
-                                    margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                    decoration: myBoxDecoration(),
-                                  ),
+                                      child: ListTile(
+                                    title: Text('Product Cost'),
+                                    subtitle: Text(data['cost']),
+                                  )),
                                   Container(
-                                    child: Text(
-                                        "Product Cost  :  " + data["cost"],
-                                        style: TextStyle(fontSize: 20),
-                                        textAlign: TextAlign.justify),
-                                    alignment: Alignment.centerLeft,
-                                    padding: const EdgeInsets.all(20),
-                                    margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                    decoration: myBoxDecoration(),
-                                  ),
+                                      child: ListTile(
+                                    title: Text('Product Added Date'),
+                                    subtitle: Text(
+                                        data["dateAdded"].toDate().toString()),
+                                  )),
                                   Container(
-                                    child: Text(
-                                        "Product Added Date  : " +
-                                            data["dateAdded"]
-                                                .toDate()
-                                                .toString(),
-                                        style: TextStyle(fontSize: 20),
-                                        textAlign: TextAlign.justify),
-                                    alignment: Alignment.centerLeft,
-                                    padding: const EdgeInsets.all(20),
-                                    margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                    decoration: myBoxDecoration(),
-                                  ),
+                                      child: ListTile(
+                                    title: Text('Product Waranty'),
+                                    subtitle: Text(
+                                        data["warranty"].toDate().toString()),
+                                  )),
                                   Container(
-                                    child: Text(
-                                        "Waranty  : " +
-                                            data["warranty"]
-                                                .toDate()
-                                                .toString(),
-                                        style: TextStyle(fontSize: 20),
-                                        textAlign: TextAlign.justify),
-                                    alignment: Alignment.centerLeft,
-                                    padding: const EdgeInsets.all(20),
-                                    margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                    decoration: myBoxDecoration(),
-                                  ),
+                                      child: ListTile(
+                                    title: Text('End of Life'),
+                                    subtitle: Text(
+                                        data["endOfLife"].toDate().toString()),
+                                  )),
                                   Container(
-                                    child: Text(
-                                        "End of Life  : " +
-                                            data["endOfLife"]
-                                                .toDate()
-                                                .toString(),
-                                        style: TextStyle(fontSize: 20),
-                                        textAlign: TextAlign.justify),
-                                    alignment: Alignment.centerLeft,
-                                    padding: const EdgeInsets.all(20),
-                                    margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                    decoration: myBoxDecoration(),
-                                  ),
+                                      child: ListTile(
+                                    title: Text('Next Service Date'),
+                                    subtitle: Text(data["nextServiceDate"]
+                                        .toDate()
+                                        .toString()),
+                                  )),
                                   Container(
-                                    child: Text(
-                                        "Next Service Date  : " +
-                                            data["nextServiceDate"]
-                                                .toDate()
-                                                .toString(),
-                                        style: TextStyle(fontSize: 20),
-                                        textAlign: TextAlign.justify),
-                                    alignment: Alignment.centerLeft,
-                                    padding: const EdgeInsets.all(20),
-                                    margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                    decoration: myBoxDecoration(),
-                                  ),
+                                      child: ListTile(
+                                    title: Text('Product Type'),
+                                    subtitle: Text(data["productType"]),
+                                  )),
                                   Container(
-                                    child: Text(
-                                        "Product Type  : " +
-                                            data["productType"],
-                                        style: TextStyle(fontSize: 20),
-                                        textAlign: TextAlign.justify),
-                                    alignment: Alignment.centerLeft,
-                                    padding: const EdgeInsets.all(20),
-                                    margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                    decoration: myBoxDecoration(),
-                                  ),
+                                      child: ListTile(
+                                    title: Text('Department'),
+                                    subtitle: Text(data["department"]),
+                                  )),
                                   Container(
-                                    child: Text(
-                                        "Department  : " + data["department"],
-                                        style: TextStyle(fontSize: 20),
-                                        textAlign: TextAlign.justify),
-                                    alignment: Alignment.centerLeft,
-                                    padding: const EdgeInsets.all(20),
-                                    margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                    decoration: myBoxDecoration(),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(0, 20, 0, 40),
+                                    margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
                                     child: MaterialButton(
                                       height: 50.0,
                                       minWidth: 3 *
@@ -266,7 +205,7 @@ class _ScannerState extends State<Scanner> {
                                     ),
                                   ),
                                   Container(
-                                    margin: EdgeInsets.fromLTRB(0, 20, 0, 40),
+                                    margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
                                     child: MaterialButton(
                                       height: 50.0,
                                       minWidth: 3 *
@@ -338,3 +277,259 @@ BoxDecoration myBoxDecoration() {
     ),
   );
 }
+
+//  });
+//                       setState(() {
+//                         showProduct = true;
+//                       });
+//                       print(doc.data());
+//                       setState(() {
+//                         data = doc.data();
+//                       });
+//                     }
+//                     Navigator.of(context)
+//                         .push(MaterialPageRoute(builder: (context) {
+//                       return showProduct
+//                           ? Scaffold(
+//                               appBar: AppBar(
+//                                   title: Text('Employee Panel'),
+//                                   actions: <Widget>[]),
+//                               body: SingleChildScrollView(
+//                                 child: Column(
+//                                   children: [
+//                                     Table(
+//                                       border: TableBorder.all(
+//                                           color: Colors.black26, width: 3),
+//                                       children: [
+//                                         TableRow(children: [
+//                                           TableCell(
+//                                             child: Center(
+//                                               child: Text(
+//                                                 'Product Description',
+//                                                 style: TextStyle(
+//                                                   fontSize: 25,
+//                                                   fontWeight: FontWeight.bold,
+//                                                 ),
+//                                               ),
+//                                             ),
+//                                           ),
+//                                           TableCell(
+//                                             child: Center(
+//                                                 child: Text(
+//                                               data["description"],
+//                                               style: TextStyle(fontSize: 25),
+//                                             )),
+//                                           )
+//                                         ]),
+//                                         TableRow(children: [
+//                                           TableCell(
+//                                             child: Center(
+//                                                 child: Text(
+//                                               'Product Status',
+//                                               style: TextStyle(
+//                                                 fontSize: 25,
+//                                                 fontWeight: FontWeight.bold,
+//                                               ),
+//                                             )),
+//                                           ),
+//                                           TableCell(
+//                                             child: Center(
+//                                                 child: Text(
+//                                               data["status"],
+//                                               style: TextStyle(fontSize: 25),
+//                                             )),
+//                                           )
+//                                         ]),
+//                                         TableRow(children: [
+//                                           TableCell(
+//                                             child: Center(
+//                                                 child: Text(
+//                                               'Product Type',
+//                                               style: TextStyle(
+//                                                 fontSize: 25,
+//                                                 fontWeight: FontWeight.bold,
+//                                               ),
+//                                             )),
+//                                           ),
+//                                           TableCell(
+//                                             child: Center(
+//                                                 child: Text(
+//                                               data["productType"],
+//                                               style: TextStyle(fontSize: 25),
+//                                             )),
+//                                           )
+//                                         ]),
+//                                         TableRow(children: [
+//                                           TableCell(
+//                                             child: Center(
+//                                                 child: Text(
+//                                               'Product Cost',
+//                                               style: TextStyle(
+//                                                 fontSize: 25,
+//                                                 fontWeight: FontWeight.bold,
+//                                               ),
+//                                             )),
+//                                           ),
+//                                           TableCell(
+//                                             child: Center(
+//                                                 child: Text(
+//                                               data["cost"],
+//                                               style: TextStyle(fontSize: 25),
+//                                             )),
+//                                           )
+//                                         ]),
+//                                         TableRow(children: [
+//                                           TableCell(
+//                                             child: Center(
+//                                                 child: Text(
+//                                               'Department',
+//                                               style: TextStyle(
+//                                                 fontSize: 25,
+//                                                 fontWeight: FontWeight.bold,
+//                                               ),
+//                                             )),
+//                                           ),
+//                                           TableCell(
+//                                             child: Center(
+//                                                 child: Text(
+//                                               data["department"],
+//                                               style: TextStyle(fontSize: 25),
+//                                             )),
+//                                           )
+//                                         ]),
+//                                         TableRow(children: [
+//                                           TableCell(
+//                                             child: Center(
+//                                                 child: Text(
+//                                               'Product Date Added',
+//                                               style: TextStyle(
+//                                                 fontSize: 25,
+//                                                 fontWeight: FontWeight.bold,
+//                                               ),
+//                                             )),
+//                                           ),
+//                                           TableCell(
+//                                             child: Center(
+//                                                 child: Text(
+//                                               data["dateAdded"]
+//                                                   .toDate()
+//                                                   .toString(),
+//                                               style: TextStyle(
+//                                                 fontSize: 25,
+//                                               ),
+//                                             )),
+//                                           )
+//                                         ]),
+//                                         TableRow(children: [
+//                                           TableCell(
+//                                             child: Center(
+//                                                 child: Text('Warranty',
+//                                                     style: TextStyle(
+//                                                       fontSize: 25,
+//                                                       fontWeight:
+//                                                           FontWeight.bold,
+//                                                     ),
+//                                                     textAlign: TextAlign.left)),
+//                                           ),
+//                                           TableCell(
+//                                             child: Center(
+//                                                 child: Text(
+//                                               data["warranty"]
+//                                                   .toDate()
+//                                                   .toString(),
+//                                               style: TextStyle(fontSize: 25),
+//                                             )),
+//                                           )
+//                                         ]),
+//                                         TableRow(children: [
+//                                           TableCell(
+//                                             child: Center(
+//                                                 child: Text(
+//                                               'Product End of Life',
+//                                               style: TextStyle(
+//                                                 fontSize: 25,
+//                                                 fontWeight: FontWeight.bold,
+//                                               ),
+//                                             )),
+//                                           ),
+//                                           TableCell(
+//                                             child: Center(
+//                                                 child: Text(
+//                                               data["endOfLife"]
+//                                                   .toDate()
+//                                                   .toString(),
+//                                               style: TextStyle(fontSize: 25),
+//                                             )),
+//                                           )
+//                                         ]),
+//                                         TableRow(children: [
+//                                           TableCell(
+//                                             child: Center(
+//                                                 child: Text(
+//                                               'Product Next Service Date',
+//                                               style: TextStyle(
+//                                                 fontSize: 25,
+//                                                 fontWeight: FontWeight.bold,
+//                                               ),
+//                                             )),
+//                                           ),
+//                                           TableCell(
+//                                             child: Center(
+//                                                 child: Text(
+//                                               data["nextServiceDate"]
+//                                                   .toDate()
+//                                                   .toString(),
+//                                               style: TextStyle(fontSize: 25),
+//                                             )),
+//                                           )
+//                                         ]),
+
+//                                       ],
+//                                     ),
+//                                     Container(
+//                                       margin: EdgeInsets.fromLTRB(0, 35, 0, 40),
+//                                       child: MaterialButton(
+//                                         height: 50.0,
+//                                         minWidth: 3 *
+//                                             MediaQuery.of(context).size.width /
+//                                             4,
+//                                         onPressed: () => {
+//                                           Navigator.of(context).push(
+//                                               MaterialPageRoute(builder:
+//                                                   (BuildContext context) {
+//                                             print(qrText.toString());
+//                                             return MyCustomForm(
+//                                                 qrText.toString());
+//                                           }))
+//                                         },
+//                                         color: Colors.white,
+//                                         child: Container(
+//                                           child: Text("Add Service"),
+//                                         ),
+//                                         shape: RoundedRectangleBorder(
+//                                             borderRadius:
+//                                                 BorderRadius.circular(18.0),
+//                                             side: BorderSide(
+//                                                 color: Colors.green)),
+//                                       ),
+//                                     )
+//                                   ],
+//                                 ),
+//                               ))
+//                           : Scaffold(
+//                               appBar: AppBar(
+//                                   title: Text('Employee Pannel'),
+//                                   actions: <Widget>[]),
+//                               body: Text('Error, Product not found!'),
+//                             );
+//                     }));
+//                   });
+//                 } else {
+//                   null;
+//                 }
+//               },
+//               child: Text('See Product'))
+//         ],
+//       ),
+//     );
+// =======
