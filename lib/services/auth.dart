@@ -26,7 +26,6 @@ class AuthService {
         email: email);
   }
 
-
   Future getUserData(String uid) async {
     DocumentReference ref = userCollection.doc(uid);
     // print("UID");
@@ -66,6 +65,15 @@ class AuthService {
       // await DatabaseService(uid: user.uid)
       //     .updateUserData('0', 'new crew member', 100);
       return (user);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
     } catch (e) {
       print(e.toString());
       return null;

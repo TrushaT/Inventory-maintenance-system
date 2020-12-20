@@ -24,7 +24,7 @@ class _ServiceListState extends State<ServiceList> {
     return widget.service_list == null
         ? Container(child: Loading())
         : Scaffold(
-            appBar: AppBar(title: Text("Employee Pannel")),
+            appBar: AppBar(title: Text("Employee Panel")),
             body: ListView.builder(
                 itemCount: widget.service_list.length,
                 itemBuilder: (context, index) {
