@@ -112,7 +112,7 @@ class _AddManagerFormState extends State<AddManagerForm> {
                   },
                   color: Colors.blueAccent,
                   child: Text(
-                    'Update',
+                    'Add',
                     style: TextStyle(color: Colors.white),
                   ))
             ]),
