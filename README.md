@@ -1,6 +1,6 @@
-# inventory_management
+# Un-Inventory Manager 
 
-A new Flutter application.
+An Education Inventory Maintainence App 
 
 ## Getting Started
 
