@@ -22,11 +22,11 @@ class _ProductDisplayState extends State<ProductDisplay> {
               ),
             ),
             padding: const EdgeInsets.all(30),
-            decoration: myBoxDecoration(),
+            // decoration: myBoxDecoration(),
           ),
           Container(
             child: Text(
-              "Product Description  :",
+              "Product Description :",
               style: TextStyle(fontSize: 20),
             ),
             alignment: Alignment.centerLeft,
@@ -34,18 +34,8 @@ class _ProductDisplayState extends State<ProductDisplay> {
             margin: EdgeInsets.fromLTRB(5, 15, 0, 0),
           ),
           Container(
-            child: Center(
-              child: Text(
-                  "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ",
-                  style: TextStyle(fontSize: 16),
-                  textAlign: TextAlign.justify),
-            ),
-            padding: const EdgeInsets.all(25),
-            decoration: myBoxDecoration(),
-          ),
-          Container(
             child: Text("Product Status  :   Active",
-                style: TextStyle(fontSize: 20), textAlign: TextAlign.justify),
+                style: TextStyle(fontSize: 20)),
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.all(20),
             margin: EdgeInsets.fromLTRB(5, 0, 0, 0),

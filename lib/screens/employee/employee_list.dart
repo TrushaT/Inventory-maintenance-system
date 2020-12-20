@@ -17,7 +17,7 @@ class _EmployeeListState extends State<EmployeeList> {
     // final employees = Provider.of<List<Inventory_User>>(context) ?? [];
     // print("From Provider");
     // print(employees);
-   
+
     return widget.employee_list == null
         ? Container(child: Text('Loading'))
         : Expanded(
