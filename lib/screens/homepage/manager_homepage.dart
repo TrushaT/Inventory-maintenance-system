@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inventory_management/models/user.dart';
+import 'package:inventory_management/screens/authenticate/login.dart';
 import 'package:inventory_management/screens/employee/employee_list.dart';
 import 'package:inventory_management/screens/homepage/employee_homepage.dart';
 import 'package:inventory_management/screens/manager/add_employee.dart';
 import 'package:inventory_management/screens/manager/scanlog.dart';
+import 'package:inventory_management/services/auth.dart';
 import 'package:inventory_management/services/employees.dart';
 import 'package:provider/provider.dart';
 import 'package:inventory_management/screens/manager/fancy_fab.dart';
@@ -23,6 +27,7 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
   List<Inventory_User> results_employee_list;
 
   TextEditingController _searchController = TextEditingController();
+  AuthService _auth = AuthService();
 
   @override
   void initState() {
@@ -68,6 +73,16 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
     searchResultsList();
   }
 
+  void showToast() {
+    Fluttertoast.showToast(
+        msg: 'You have been logged out',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIos: 1,
+        backgroundColor: Colors.grey[800],
+        textColor: Colors.white);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,6 +102,23 @@ class _ManagerHomePageState extends State<ManagerHomePage> {
                   Icons.assignment,
                   size: 30.0,
                 ),
+              )),
+          FlatButton.icon(
+              onPressed: () async {
+                showToast();
+                await _auth.signOut().then((value) =>
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => Login()),
+                        (Route<dynamic> route) => false));
+              },
+              icon: Icon(
+                Icons.person,
+                color: Colors.white,
+              ),
+              label: Text(
+                'Logout',
+                style: TextStyle(color: Colors.white),
               )),
         ],
       ),

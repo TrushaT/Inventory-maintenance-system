@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:inventory_management/services/auth.dart';
 import 'package:inventory_management/services/employees.dart';
 import 'package:inventory_management/shared/constants.dart';
+import 'package:inventory_management/shared/toast.dart';
 
 class AddManagerForm extends StatefulWidget {
   @override
@@ -19,6 +20,7 @@ class _AddManagerFormState extends State<AddManagerForm> {
   String department;
   String mobile_number;
   String email;
+  CustomToast toast = CustomToast();
 
   void addManager(name, user_type, date_of_joining, department, mobile_number,
       email) async {
@@ -37,6 +39,7 @@ class _AddManagerFormState extends State<AddManagerForm> {
         department: department,
         mobile_number: mobile_number,
         email: email);
+    toast.showToast('Manager Added', Colors.grey[700], Colors.white);
     Navigator.pop(context);
   }
 

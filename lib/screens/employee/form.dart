@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:inventory_management/shared/constants.dart';
+import 'package:inventory_management/shared/toast.dart';
 import './firebase.dart';
 
 // class FormApp extends StatelessWidget {
@@ -37,6 +38,7 @@ class MyCustomFormState extends State<MyCustomForm> {
   final textcost = new TextEditingController();
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
   DateTime _dateTime;
+  CustomToast toast = CustomToast();
 
   @override
   Widget build(BuildContext context) {
@@ -131,13 +133,15 @@ class MyCustomFormState extends State<MyCustomForm> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0)),
                           color: Colors.green,
-                          onPressed: () => {
+                          onPressed: () {
                             serviceSetup(
                                 widget.productId,
                                 textdescription.text,
                                 textcost.text,
                                 _dateTime.toString(),
-                                widget.productType)
+                                widget.productType);
+                            toast.showToast('Service Details Added',
+                                Colors.green, Colors.white);
                           },
                           child: Text(
                             'Add Service',

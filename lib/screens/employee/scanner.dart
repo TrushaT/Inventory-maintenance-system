@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/models/service.dart';
 import 'package:inventory_management/screens/employee/serviceList.dart';
+import 'package:inventory_management/shared/toast.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qr_code_scanner/qr_scanner_overlay_shape.dart';
 import './product_display.dart';
@@ -20,6 +21,7 @@ class _ScannerState extends State<Scanner> {
   bool showProduct = false;
   var qrText = "";
   String dateAdded;
+  CustomToast toast = CustomToast();
 
   Map<String, dynamic> data;
   CollectionReference users = FirebaseFirestore.instance.collection('product');
@@ -61,6 +63,8 @@ class _ScannerState extends State<Scanner> {
         RaisedButton(
             onPressed: () {
               if (qrText != null) {
+                toast.showToast(
+                    'QR Code Recognized', Colors.grey[700], Colors.white);
                 users
                     .document(qrText.toString())
                     .get()
